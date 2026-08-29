@@ -1,0 +1,43 @@
+.stat-card {
+  padding: 22px 24px;
+  min-height: 128px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.stat-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stat-card__icon {
+  font-size: 1.1rem;
+  opacity: 0.7;
+}
+
+.stat-card__value {
+  font-size: clamp(1.5rem, 3.4vw, 2.1rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+.stat-card__label {
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+}
+
+.stat-card--income .stat-card__value {
+  color: var(--income);
+}
+
+.stat-card--expense .stat-card__value {
+  color: var(--expense);
+}
+
+.stat-card--accent .stat-card__value {
+  color: var(--accent);
+}

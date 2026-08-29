@@ -1,0 +1,435 @@
+/* =========================================================================
+   STRAKD — Design tokens
+   Palette: ink #19171b / charcoal #252628 / gold #d29f22 / maroon #5d0018
+   Type:    Space Grotesk (display) · Inter (body) · Space Mono (data/track#)
+   ========================================================================= */
+
+:root {
+  --font-display: "Space Grotesk", "Inter", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "Space Mono", monospace;
+
+  --ink: #19171b;
+  --charcoal: #252628;
+  --gold: #d29f22;
+  --gold-soft: #e8c163;
+  --maroon: #5d0018;
+  --maroon-soft: #9c1638;
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --nav-h: 76px;
+  --container: 1180px;
+}
+
+/* ---------- Dark theme (default) ---------- */
+[data-theme="dark"] {
+  --bg: var(--ink);
+  --bg-elevated: #201d21;
+  --bg-grid-line: rgba(210, 159, 34, 0.07);
+
+  --text-primary: #f6f0e4;
+  --text-secondary: rgba(246, 240, 228, 0.62);
+  --text-tertiary: rgba(246, 240, 228, 0.38);
+
+  --glass-bg: rgba(246, 240, 228, 0.05);
+  --glass-bg-strong: rgba(246, 240, 228, 0.085);
+  --glass-border: rgba(210, 159, 34, 0.16);
+  --glass-border-strong: rgba(210, 159, 34, 0.32);
+  --glass-highlight: rgba(232, 193, 99, 0.16);
+  --glass-shadow: rgba(0, 0, 0, 0.5);
+
+  --accent: var(--gold);
+  --accent-contrast: #19171b;
+  --income: var(--gold);
+  --expense: #e2495f;
+
+  --scrim: rgba(10, 8, 9, 0.76);
+}
+
+/* ---------- Light theme ---------- */
+[data-theme="light"] {
+  --bg: #f3ece0;
+  --bg-elevated: #faf5ea;
+  --bg-grid-line: rgba(93, 0, 24, 0.05);
+
+  --text-primary: #201a12;
+  --text-secondary: rgba(32, 26, 18, 0.64);
+  --text-tertiary: rgba(32, 26, 18, 0.42);
+
+  --glass-bg: rgba(255, 255, 255, 0.5);
+  --glass-bg-strong: rgba(255, 255, 255, 0.74);
+  --glass-border: rgba(93, 0, 24, 0.1);
+  --glass-border-strong: rgba(93, 0, 24, 0.18);
+  --glass-highlight: rgba(255, 255, 255, 0.92);
+  --glass-shadow: rgba(93, 0, 24, 0.14);
+
+  --accent: var(--maroon);
+  --accent-contrast: #f6f0e4;
+  --income: #96731a;
+  --expense: var(--maroon);
+
+  --scrim: rgba(243, 236, 224, 0.76);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+}
+[data-theme="light"] {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.4s var(--ease-out), color 0.4s var(--ease-out);
+  overflow-x: hidden;
+}
+
+#root {
+  position: relative;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+/* ---------- Layout ---------- */
+.page {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: calc(var(--nav-h) + 40px) 28px 100px;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 720px) {
+  .page {
+    padding: calc(var(--nav-h) + 24px) 16px 80px;
+  }
+}
+
+/* ---------- Scene / background ---------- */
+.scene {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.scene__grid {
+  position: absolute;
+  inset: -20%;
+  background-image:
+    linear-gradient(var(--bg-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bg-grid-line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  transform: perspective(600px) rotateX(58deg) translateZ(-100px);
+  transform-origin: center top;
+  opacity: 0.6;
+  mask-image: linear-gradient(to bottom, black, transparent 75%);
+}
+
+.scene__orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(4px);
+  opacity: 0.5;
+  will-change: transform;
+}
+
+.scene__ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid var(--glass-border-strong);
+  opacity: 0.35;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene__orb,
+  .scene__ring {
+    animation: none !important;
+  }
+}
+
+/* ---------- Glass primitives ---------- */
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  box-shadow:
+    0 1px 0 0 var(--glass-highlight) inset,
+    0 20px 40px -20px var(--glass-shadow);
+  border-radius: var(--radius-lg);
+}
+
+.glass-strong {
+  background: var(--glass-bg-strong);
+  border: 1px solid var(--glass-border-strong);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  --btn-fg: var(--text-primary);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 24px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.88rem;
+  letter-spacing: 0.02em;
+  color: var(--btn-fg);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border-strong);
+  border-radius: 100px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 1px 0 0 var(--glass-highlight) inset, 0 10px 24px -12px var(--glass-shadow);
+  cursor: pointer;
+  transition: transform 0.22s var(--ease-out), box-shadow 0.22s var(--ease-out), background 0.22s var(--ease-out), border-color 0.22s var(--ease-out);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 1px 0 0 var(--glass-highlight) inset, 0 16px 32px -14px var(--glass-shadow), 0 0 0 1px var(--glass-border-strong);
+  border-color: var(--accent);
+}
+
+.btn:active {
+  transform: translateY(0px) scale(0.98);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.btn-primary {
+  --btn-fg: var(--accent-contrast);
+  background: var(--accent);
+  border-color: transparent;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.4) inset, 0 16px 34px -12px var(--accent), 0 0 24px -4px var(--accent);
+  border-color: transparent;
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: var(--glass-border);
+  box-shadow: none;
+}
+
+.btn-danger {
+  --btn-fg: var(--expense);
+  border-color: color-mix(in srgb, var(--expense) 45%, transparent);
+}
+
+.btn-sm {
+  padding: 9px 16px;
+  font-size: 0.78rem;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* ---------- Form elements ---------- */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.field input,
+.field select,
+.field textarea {
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  color: var(--text-primary);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  padding: 13px 16px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: border-color 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out);
+  width: 100%;
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 88px;
+  font-family: var(--font-body);
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+.field-error input,
+.field-error select,
+.field-error textarea {
+  border-color: var(--expense);
+}
+
+.field-error-msg {
+  font-size: 0.78rem;
+  color: var(--expense);
+}
+
+.type-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.type-toggle button {
+  padding: 13px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.86rem;
+  cursor: pointer;
+  transition: all 0.2s var(--ease-out);
+}
+
+.type-toggle button[aria-pressed="true"][data-type="income"] {
+  background: color-mix(in srgb, var(--income) 18%, transparent);
+  border-color: var(--income);
+  color: var(--income);
+}
+
+.type-toggle button[aria-pressed="true"][data-type="expense"] {
+  background: color-mix(in srgb, var(--expense) 18%, transparent);
+  border-color: var(--expense);
+  color: var(--expense);
+}
+
+/* ---------- Scrollbar (subtle) ---------- */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--glass-border-strong);
+  border-radius: 100px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ---------- Shared page heading ---------- */
+.page--narrow {
+  max-width: 620px;
+}
+
+.page-heading {
+  font-size: clamp(1.9rem, 5vw, 2.6rem);
+  margin-top: 8px;
+}
+
+.page-subheading {
+  margin-top: 8px;
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  margin-bottom: 32px;
+}
+
+/* ---------- Utility ---------- */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  top: -60px;
+  left: 16px;
+  z-index: 100;
+  background: var(--accent);
+  color: var(--accent-contrast);
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  transition: top 0.2s var(--ease-out);
+}
+
+.skip-link:focus {
+  top: 16px;
+}

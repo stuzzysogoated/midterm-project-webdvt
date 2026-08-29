@@ -1,0 +1,27 @@
+.txn-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.txn-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.txn-form__actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.txn-form__actions .btn-block {
+  flex: 1;
+}
+
+@media (max-width: 520px) {
+  .txn-form__row {
+    grid-template-columns: 1fr;
+  }
+}

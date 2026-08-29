@@ -1,0 +1,55 @@
+.logo {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--text-primary);
+  transform-style: preserve-3d;
+  perspective: 400px;
+}
+
+.logo--md {
+  font-size: 1.4rem;
+}
+
+.logo--lg {
+  font-size: clamp(3rem, 11vw, 6.4rem);
+  letter-spacing: -0.03em;
+}
+
+.logo__face {
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(180deg, var(--text-primary) 0%, var(--text-primary) 55%, var(--accent) 160%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.logo__stack {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--glass-border-strong);
+  transform: translate3d(2px, 3px, -12px);
+  opacity: 0.6;
+}
+
+.logo--lg .logo__stack {
+  transform: translate3d(4px, 6px, -30px);
+  -webkit-text-stroke: 1.5px var(--glass-border-strong);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .logo--lg {
+    animation: logoFloat 6s ease-in-out infinite;
+  }
+}
+
+@keyframes logoFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}

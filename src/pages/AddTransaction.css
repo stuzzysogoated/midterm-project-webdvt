@@ -1,0 +1,9 @@
+.txn-form-card {
+  padding: 28px;
+}
+
+@media (max-width: 520px) {
+  .txn-form-card {
+    padding: 20px;
+  }
+}
