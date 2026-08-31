@@ -1,7 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-// (isReady flag removed — initial state is always synchronous/ready here)
 import { generateId } from "../utils/transactionUtils";
-import { SEED_TRANSACTIONS } from "../utils/seedData";
 
 const STORAGE_KEY = "strakd:transactions";
 
@@ -29,14 +27,14 @@ function writeToStorage(transactions) {
  * useTransactions — single source of truth for STRAKD's transaction data.
  * Reads/writes localStorage so every page shares one hook instead of
  * duplicating persistence logic across components.
+ *
+ * Every new user starts at a genuine ₱0.00 — no seed/sample transactions are
+ * ever written. The hero's money-stack animation is a purely visual metaphor
+ * and never touches this state.
  */
 export function useTransactions() {
-  const [transactions, setTransactions] = useState(() => {
-    const stored = readFromStorage();
-    if (stored) return stored;
-    writeToStorage(SEED_TRANSACTIONS);
-    return SEED_TRANSACTIONS;
-  });
+  const [transactions, setTransactions] = useState(() => readFromStorage() ?? []);
+
   useEffect(() => {
     writeToStorage(transactions);
   }, [transactions]);
