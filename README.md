@@ -17,11 +17,11 @@ A futuristic, glassmorphic personal budget tracker with a hip-hop / streetwear-i
 ## Stack
 
 - **React 19 + Vite**
-- **React Router v6** — real routes for every page (`/`, `/dashboard`, `/add-transaction`, `/transaction/:id`, `/summary`)
-- **Context API** — `ThemeContext` (light/dark, no prop drilling) and `TransactionsContext` (shares one `useTransactions()` instance across routes)
-- **Custom hook** — `useTransactions()` centralizes all read/write/add/update/delete + localStorage sync
-- **Framer Motion** — page transitions, card entrances, modal/menu animations
-- **CSS 3D** — cursor-tilt glass cards, parallax background, layered logo depth (no WebGL — CSS transforms are the simplest tool that does the job here)
+- **React Router v6** - real routes for every page (`/`, `/dashboard`, `/add-transaction`, `/transaction/:id`, `/summary`)
+- **Context API** - `ThemeContext` (light/dark, no prop drilling) and `TransactionsContext` (shares one `useTransactions()` instance across routes)
+- **Custom hook** - `useTransactions()` centralizes all read/write/add/update/delete + localStorage sync
+- **Framer Motion** - page transitions, card entrances, modal/menu animations
+- **CSS 3D** - cursor-tilt glass cards, parallax background, layered logo depth (no WebGL, CSS transforms are the simplest tool that does the job here)
 - **`prefers-reduced-motion`** respected throughout
 
 ## Run locally
