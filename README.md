@@ -38,27 +38,6 @@ npm run build
 npm run preview
 ```
 
-## Deploy
-
-### 1. Push to GitHub
-
-```bash
-git init
-git add .
-git commit -m "STRAKD — initial build"
-git branch -M main
-git remote add origin https://github.com/<your-username>/midterm-project-webdvt.git
-git push -u origin main
-```
-
-### 2. Deploy to Vercel
-
-1. Go to vercel.com/new and import the `midterm-project-webdvt` repo.
-2. Framework preset: **Vite** (auto-detected). Build command `npm run build`, output directory `dist`.
-3. Deploy.
-
-`vercel.json` is already included with a SPA rewrite rule, so refreshing a dynamic route like `/transaction/123` in production will not 404.
-
 ## Project structure
 
 ```
@@ -76,5 +55,5 @@ src/
 ## Notes
 
 - Transactions persist in `localStorage` and seed with 10 realistic sample tracks on first load.
-- Performance: totals/breakdowns are `useMemo`'d off the transaction list, list rows and cards are `React.memo`'d, and hook callbacks are `useCallback`'d — each has an inline comment explaining why.
+- Performance: totals/breakdowns are `useMemo`'d off the transaction list, list rows and cards are `React.memo`'d, and hook callbacks are `useCallback`'d, each has an inline comment explaining why.
 - Income/expense are distinguished by an up/down glyph **and** color, not color alone.
